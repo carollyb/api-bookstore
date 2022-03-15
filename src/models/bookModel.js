@@ -21,7 +21,7 @@ Book.init({
         type: DataTypes.INTEGER
     },
     publication_date: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
     },
     publisher: {
         type: DataTypes.STRING,
@@ -32,4 +32,5 @@ Book.init({
     timestamps: false
 });
 
+//colocar um método para dropar a tabela
 module.exports = Book;
