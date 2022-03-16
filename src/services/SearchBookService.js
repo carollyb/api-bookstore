@@ -5,10 +5,6 @@ const Op = sequelize.Op
 module.exports = {
     async searchBook(title) {
         const titleSearch = await Book.findOne({where: {title: title}})
-        
-        if (titleSearch == null) {
-            throw new Error("Book not found/Might be registered with a similar title")
-        }
 
         return titleSearch
     },
@@ -25,4 +21,9 @@ module.exports = {
         return titleSearchLike
 
     },
+    async searchById(id) {
+        const searchBookById = await Book.findByPk({where: {id: id}})
+
+        return searchBookById
+    }
 }

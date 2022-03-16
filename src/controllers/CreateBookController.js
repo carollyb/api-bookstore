@@ -9,9 +9,9 @@ module.exports = {
      * @returns Object
      */
     async handle(request, response) {
+        
         try {
             const {title, author_id, language, num_pages, publication_date, publisher} = request.body;
-
             const book = await CreateBookService.execute( 
                 title, 
                 author_id,
@@ -22,7 +22,6 @@ module.exports = {
 
             response.status(201).json(book)
         } catch(err) {
-            console.log(err);
             response.status(400).json({error: err.message})
         }
     }

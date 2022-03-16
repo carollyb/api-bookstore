@@ -19,7 +19,11 @@ module.exports = {
 
         if(bookAlreadyExists) {
             throw new Error("This book already exists on our database")
-        } 
+        }
+
+        if(!title) {
+            throw new Error("The field 'title' is required.")
+        }
         
         const idHash = uuid();
 

@@ -32,5 +32,4 @@ Book.init({
     timestamps: false
 });
 
-//colocar um método para dropar a tabela
 module.exports = Book;
