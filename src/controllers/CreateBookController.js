@@ -21,9 +21,9 @@ module.exports = {
                 publisher)
 
             response.status(201).json(book)
-        } catch (e) {
-            console.log(e);
-            response.status(400).json({error: e})
+        } catch(err) {
+            console.log(err);
+            response.status(400).json({error: err.message})
         }
     }
 }

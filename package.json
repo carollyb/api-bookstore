@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node ./src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "author": "\"carolly\"",
   "license": "ISC",
@@ -14,5 +14,8 @@
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }

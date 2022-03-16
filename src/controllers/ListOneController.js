@@ -8,13 +8,13 @@ module.exports = {
      * @param {response} response 
      */
     async handle(request, response) {
-        const title = request.params.title;
-
-        const book = await SearchBookService.searchBook(title)
-        if (book) {
+        try {
+            const title = request.params.title;
+            const book = await SearchBookService.searchLike(title)
             response.status(200).json(book)
-        } else {  
-            response.status(400).json({error: "Book not found"})
+        } catch(err) {
+            response.status(400).json({error: err.message})
         }
+        
     }
 }

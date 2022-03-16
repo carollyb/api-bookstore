@@ -7,7 +7,7 @@ module.exports = {
             const books = await Book.findAll();
             response.status(200).json(books)
         } catch (err) {
-            response.status(400).json({error: err})
+            response.status(400).json({error: err.message})
         }
     }
 }

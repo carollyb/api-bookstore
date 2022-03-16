@@ -16,7 +16,6 @@ module.exports = {
     async execute(title, author_id, language, num_pages, publication_date, publisher) {
 
         const bookAlreadyExists = await SearchBookService.searchBook(title)
-        console.log(bookAlreadyExists)
 
         if(bookAlreadyExists) {
             throw new Error("This book already exists on our database")
