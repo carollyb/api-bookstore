@@ -1,5 +1,5 @@
-const request = require("supertest")
-const { describe } = require("../models/bookModel")
+const request = require("supertest");
+
 const app = require("../server")
 
 describe("POST /books", () => {
@@ -7,19 +7,20 @@ describe("POST /books", () => {
         //should save book entry to database
         test("Should generate a book id", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 29",
+                title: "Sample Book 1000",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
                 publication_date: "2022-12-12T00:00:00.000Z",
                 publisher: "Sample Publisher"
             })
-            expect(response.body.id).toBeDefined()
-        })
+            const id = response.body.id;
+            expect(id).toBeDefined()
+        });
         
         test("Should respond with a 201 status code", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 30",
+                title: "Sample Book 1001",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -27,10 +28,11 @@ describe("POST /books", () => {
                 publisher: "Sample Publisher"
             })
             expect(response.statusCode).toBe(201)
-        })
+        });
+
         test("Should specify JSON in the content type header", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 31",
+                title: "Sample Book 1002",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -38,7 +40,7 @@ describe("POST /books", () => {
                 publisher: "Sample Publisher"
             })
             expect(response.headers['content-type']).toEqual(expect.stringContaining("json"))
-        })
+        });
 
     })
 
@@ -46,7 +48,7 @@ describe("POST /books", () => {
         //should respond with a 400 status code
         test("Should not allow to create an entry with a duplicate title", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 3",
+                title: "Sample Book 2",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -54,7 +56,7 @@ describe("POST /books", () => {
                 publisher: "Sample Publisher"
             })
             expect(response.statusCode).toBe(400)
-        })
+        });
 
         test("Should not allow to create a book entry without a title", async () => {
             const response = await request(app).post("/books").send({
@@ -65,7 +67,127 @@ describe("POST /books", () => {
                 publisher: "Sample Publisher"
             })
             expect(response.statusCode).toBe(400)
+        });
+    })
+})
+
+describe("DELETE /books", () => {
+    describe("Given a book id", () => {
+        test("Should return a 202 status code", async () => {
+            const response = await request(app).post("/books").send({
+                title: "Delete Test",
+                author_id: "54mpl310",
+                language: "Sample Language",
+                num_pages: 201,
+                publication_date: "2022-12-12T00:00:00.000Z",
+                publisher: "Sample Publisher"
+            })
+            const id = response.body.id;
+
+            const erase = await request(app).delete(`/books/${id}`)
+
+            expect(erase.statusCode).toBe(202)
+            
+        })
+
+        test("Should delete a book", async () => {
+            const response = await request(app).post("/books").send({
+                title: "Delete Test",
+                author_id: "54mpl310",
+                language: "Sample Language",
+                num_pages: 201,
+                publication_date: "2022-12-12T00:00:00.000Z",
+                publisher: "Sample Publisher"
+            })
+            const id = response.body.id;
+
+            const erase = await request(app).delete(`/books/${id}`)
+
+            expect(erase.body).toHaveProperty("message")
+            
         })
     })
 })
 
+describe("GET /books", () => {
+    describe("Given no parameters", () => {
+        test("Should return all books", async () => {
+            const response = await request(app).get("/books")
+
+            expect(response.body.message).toBe("All books listed below")
+        })
+
+        test("Should return a 200 status code", async () => {
+            const response = await request(app).get("/books")
+
+            expect(response.statusCode).toBe(200)
+        })
+    })
+
+    describe("Given a title", () => {
+        test("Should return all titles that are similar to query", async () => {
+            const response = await request(app).get("/books/Sample")
+
+            expect(response.body).toHaveProperty("results")
+        })
+    })
+})
+
+describe("PUT /books", () => {
+    test("Should update a book entry and return a 202 status code", async () => {
+        const response = await request(app).put("/books/eca44518-ac94-41a6-a531-b86717710fd4").send({
+            title: "Sample Book Updated",
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+        expect(response.body).toHaveProperty("message")
+        expect(response.statusCode).toBe(202)
+    })
+
+    test("Should not update a book entry if a field is mising", async () => {
+        const response = await request(app).put("/books/eca44518-ac94-41a6-a531-b86717710fd4").send({
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+        expect(response.body).toHaveProperty("error")
+    })
+
+    test("Should not try to update id", async () => {
+        const response = await request(app).put("/books/eca44518-ac94-41a6-a531-b86717710fd4").send({
+            id: "1",
+            title: "Sample Book Updated Put",
+            author_id: "54mpl3 Updated Put",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+        expect(response.body).toHaveProperty("error")
+    })
+
+})
+
+describe("PATCH /books", () => {
+    test("Should update title", async () => {
+        const response = await request(app).patch("/books/83109868-6cf6-4195-8e8f-153330a75669").send({
+            title: "Sample Book Updated Patch"
+        })
+
+        expect(response.body).toHaveProperty("message")
+
+    })
+
+    test("Should return a 202 status code", async () => {
+        const response = await request(app).patch("/books/83109868-6cf6-4195-8e8f-153330a75669").send({
+            title: "Sample Book Updated Patch 2"
+        })
+
+        expect(response.statusCode).toBe(202)
+    })
+})

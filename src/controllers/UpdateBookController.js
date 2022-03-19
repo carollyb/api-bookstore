@@ -8,7 +8,8 @@ module.exports = {
             const newTitle = request.body.title;
     
             const updatedBook = await updateBookService.execute(id, newTitle)
-            response.status(202).json(updatedBook)
+            response.status(202).json({message: "Successfully updated",
+            "book updated": updatedBook})
         } catch(err) {
             response.status(400).json({error: err.message})
         }

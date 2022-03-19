@@ -5,7 +5,6 @@ const { request, response, next } = require("express")
 module.exports = {
     validateFields(request, response, next) {
         const schema = Joi.object().keys({
-            id: Joi.string().required(),
             title: Joi.string().required(),
             author_id: Joi.string().required(),
             language: Joi.string().required(),
@@ -17,7 +16,7 @@ module.exports = {
         const { error, value } = schema.validate(request.body)
 
         if(error) {
-            return response.status(400).json({error: "There are probably some missing fields"})
+            return response.status(400).json({error: "There are probably some missing fields or you are trying to update id"})
         } else {
             return next()
         }

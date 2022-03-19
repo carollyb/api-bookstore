@@ -22,7 +22,7 @@ module.exports = {
 
     },
     async searchById(id) {
-        const searchBookById = await Book.findByPk({where: {id: id}})
+        const searchBookById = await Book.findOne({where: {id: id}})
 
         return searchBookById
     }

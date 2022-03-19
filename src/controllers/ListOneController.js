@@ -11,7 +11,7 @@ module.exports = {
         try {
             const title = request.params.title;
             const book = await SearchBookService.searchLike(title)
-            response.status(200).json(book)
+            response.status(200).json({results: book})
         } catch(err) {
             response.status(400).json({error: err.message})
         }

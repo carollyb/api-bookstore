@@ -5,7 +5,6 @@ const listOneController = require("./controllers/ListOneController");
 const deleteBookController = require("./controllers/DeleteBookController");
 const updateBookController = require("./controllers/UpdateBookController");
 const requiredFields = require("./middlewares/requiredFields");
-const caseSensitive = require("./middlewares/caseSensitive");
 
 const router = express.Router();
 
