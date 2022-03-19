@@ -1,8 +1,9 @@
+require('dotenv').config({path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"})
 const express = require("express");
-const sequelize = require("./database/index");
+const sequelize = require(process.env.DB)
 const bookRoute = require("./routes")
 
-const port = 3000;
+const port = process.env.PORT;
 const app = express();
 
 sequelize.sync().then(() => {

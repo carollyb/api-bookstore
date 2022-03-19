@@ -7,7 +7,7 @@ describe("POST /books", () => {
         //should save book entry to database
         test("Should generate a book id", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 1000",
+                title: "Sample Book 10000",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -48,7 +48,7 @@ describe("POST /books", () => {
         //should respond with a 400 status code
         test("Should not allow to create an entry with a duplicate title", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 2",
+                title: "Sample Book 1001",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -135,7 +135,18 @@ describe("GET /books", () => {
 
 describe("PUT /books", () => {
     test("Should update a book entry and return a 202 status code", async () => {
-        const response = await request(app).put("/books/eca44518-ac94-41a6-a531-b86717710fd4").send({
+        const temporary = await request(app).post("/books").send({
+            title: "Sample Book 7000",
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+
+        const id = temporary.body.id
+
+        const response = await request(app).put(`/books/${id}`).send({
             title: "Sample Book Updated",
             author_id: "54mpl310",
             language: "Sample Language",
@@ -148,7 +159,18 @@ describe("PUT /books", () => {
     })
 
     test("Should not update a book entry if a field is mising", async () => {
-        const response = await request(app).put("/books/eca44518-ac94-41a6-a531-b86717710fd4").send({
+        const temporary = await request(app).post("/books").send({
+            title: "Sample Book 3000",
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+
+        const id = temporary.body.id
+
+        const response = await request(app).put(`/books/${id}`).send({
             author_id: "54mpl310",
             language: "Sample Language",
             num_pages: 201,
@@ -159,7 +181,18 @@ describe("PUT /books", () => {
     })
 
     test("Should not try to update id", async () => {
-        const response = await request(app).put("/books/eca44518-ac94-41a6-a531-b86717710fd4").send({
+        const temporary = await request(app).post("/books").send({
+            title: "Sample Book 4000",
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+
+        const id = temporary.body.id
+
+        const response = await request(app).put(`/books/${id}`).send({
             id: "1",
             title: "Sample Book Updated Put",
             author_id: "54mpl3 Updated Put",
@@ -175,7 +208,18 @@ describe("PUT /books", () => {
 
 describe("PATCH /books", () => {
     test("Should update title", async () => {
-        const response = await request(app).patch("/books/83109868-6cf6-4195-8e8f-153330a75669").send({
+        const temporary = await request(app).post("/books").send({
+            title: "Sample Book 4000",
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+
+        const id = temporary.body.id
+
+        const response = await request(app).patch(`/books/${id}`).send({
             title: "Sample Book Updated Patch"
         })
 
@@ -184,7 +228,18 @@ describe("PATCH /books", () => {
     })
 
     test("Should return a 202 status code", async () => {
-        const response = await request(app).patch("/books/83109868-6cf6-4195-8e8f-153330a75669").send({
+        const temporary = await request(app).post("/books").send({
+            title: "Sample Book 9000",
+            author_id: "54mpl310",
+            language: "Sample Language",
+            num_pages: 201,
+            publication_date: "2022-12-12T00:00:00.000Z",
+            publisher: "Sample Publisher"
+        })
+
+        const id = temporary.body.id
+
+        const response = await request(app).patch(`/books/${id}`).send({
             title: "Sample Book Updated Patch 2"
         })
 
