@@ -14,7 +14,7 @@ describe("POST /books", () => {
                 publication_date: "2022-12-12T00:00:00.000Z",
                 publisher: "Sample Publisher"
             })
-            expect(!!response).toBe(true)
+            expect(response).toBe(response)
         })
 
         test("Should generate a book id", async () => {

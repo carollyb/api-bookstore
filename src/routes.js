@@ -5,10 +5,11 @@ const listOneController = require("./controllers/ListOneController");
 const deleteBookController = require("./controllers/DeleteBookController");
 const updateBookController = require("./controllers/UpdateBookController");
 const requiredFields = require("./middlewares/requiredFields");
+const checkDuplicates = require("./middlewares/checkDuplicates");
 
 const router = express.Router();
 
-router.post("/books", createBookController.handle);
+router.post("/books", checkDuplicates.checkDuplicates, createBookController.handle);
 
 router.get("/books", listAllController.all);
 router.get("/books/:title", listOneController.handle);

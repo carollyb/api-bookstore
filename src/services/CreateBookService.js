@@ -1,6 +1,5 @@
 const Book = require("../models/bookModel");
 const { v4: uuid } = require('uuid');
-const SearchBookService = require("./SearchBookService");
 
 module.exports = {
     /**
@@ -14,27 +13,17 @@ module.exports = {
      * @returns Object
      */
     async execute(title, author_id, language, num_pages, publication_date, publisher) {
-
-        const bookAlreadyExists = await SearchBookService.searchBook(title)
-
-        if(bookAlreadyExists) {
-            throw new Error("This book already exists on our database")
-        }
-
-        if(!title) {
-            throw new Error("The field 'title' is required.")
-        }
-        
+                
         const idHash = uuid();
 
         const book = await Book.create({
             id: idHash,
-            title,
-            author_id,
-            language,
-            num_pages,
-            publication_date,
-            publisher
+            title: title,
+            author_id: author_id,
+            language: language,
+            num_pages: num_pages,
+            publication_date: publication_date,
+            publisher: publisher
         })
 
         return book
