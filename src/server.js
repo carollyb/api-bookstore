@@ -6,9 +6,7 @@ const databaseSync = require(process.env.SYNC)
 const port = process.env.PORT;
 const app = express();
 
-if (process.env.NODE_ENV === "dev") {
-    databaseSync()
-}
+databaseSync()
 
 app.use(express.json());
 

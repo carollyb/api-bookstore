@@ -10,4 +10,4 @@ async function databaseSync() {
     }
 }
 
-databaseSync()
+module.exports = databaseSync
