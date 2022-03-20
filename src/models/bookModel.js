@@ -1,5 +1,7 @@
+require('dotenv').config({path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"})
+
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../database/index");
+const sequelize = require(`.${process.env.DB}`);
 
 class Book extends Model{}
 

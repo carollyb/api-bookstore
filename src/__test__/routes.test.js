@@ -4,23 +4,34 @@ const app = require("../server")
 
 describe("POST /books", () => {
     describe("Given a title, author_id, language, num_pages, publication_date and publisher", () => {
-        //should save book entry to database
-        test("Should generate a book id", async () => {
+
+        it("Should create a table", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 10000",
+                title: "Book Sample 0",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
                 publication_date: "2022-12-12T00:00:00.000Z",
                 publisher: "Sample Publisher"
             })
-            const id = response.body.id;
-            expect(id).toBeDefined()
-        });
+            expect(!!response).toBe(true)
+        })
+
+        test("Should generate a book id", async () => {
+            const response = await request(app).post("/books").send({
+                title: "Book Sample 1",
+                author_id: "54mpl310",
+                language: "Sample Language",
+                num_pages: 201,
+                publication_date: "2022-12-12T00:00:00.000Z",
+                publisher: "Sample Publisher"
+            })
+            expect(response.body).toHaveProperty("id")
+        })
         
         test("Should respond with a 201 status code", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 1001",
+                title: "Book Sample 2",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -32,7 +43,7 @@ describe("POST /books", () => {
 
         test("Should specify JSON in the content type header", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 1002",
+                title: "Book Sample 3",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -45,10 +56,10 @@ describe("POST /books", () => {
     })
 
     describe("When entry is flawed", () => {
-        //should respond with a 400 status code
+        
         test("Should not allow to create an entry with a duplicate title", async () => {
             const response = await request(app).post("/books").send({
-                title: "Sample Book 1001",
+                title: "Book Sample 2",
                 author_id: "54mpl310",
                 language: "Sample Language",
                 num_pages: 201,
@@ -136,7 +147,7 @@ describe("GET /books", () => {
 describe("PUT /books", () => {
     test("Should update a book entry and return a 202 status code", async () => {
         const temporary = await request(app).post("/books").send({
-            title: "Sample Book 7000",
+            title: "Book Sample 6",
             author_id: "54mpl310",
             language: "Sample Language",
             num_pages: 201,
@@ -160,7 +171,7 @@ describe("PUT /books", () => {
 
     test("Should not update a book entry if a field is mising", async () => {
         const temporary = await request(app).post("/books").send({
-            title: "Sample Book 3000",
+            title: "Book Sample 7",
             author_id: "54mpl310",
             language: "Sample Language",
             num_pages: 201,
@@ -182,7 +193,7 @@ describe("PUT /books", () => {
 
     test("Should not try to update id", async () => {
         const temporary = await request(app).post("/books").send({
-            title: "Sample Book 4000",
+            title: "Book Sample 8",
             author_id: "54mpl310",
             language: "Sample Language",
             num_pages: 201,
@@ -209,7 +220,7 @@ describe("PUT /books", () => {
 describe("PATCH /books", () => {
     test("Should update title", async () => {
         const temporary = await request(app).post("/books").send({
-            title: "Sample Book 4000",
+            title: "Book Sample 9",
             author_id: "54mpl310",
             language: "Sample Language",
             num_pages: 201,

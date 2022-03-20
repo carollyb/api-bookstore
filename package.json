@@ -4,6 +4,7 @@
   "description": "\"projeto módulo 4\"",
   "main": "index.js",
   "scripts": {
+    "pretest": "node ./src/database/testDatabaseConnection.js",
     "dev": "node ./src/server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest"
   },
@@ -15,6 +16,7 @@
     "express": "^4.17.3",
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
+    "unit-tests": "^1.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
