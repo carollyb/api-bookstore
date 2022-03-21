@@ -6,14 +6,16 @@ const databaseSync = require(process.env.SYNC)
 const port = process.env.PORT;
 const app = express();
 
-databaseSync()
-
 app.use(express.json());
+
+const connection = databaseSync()
 
 app.use(bookRoute);
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
-})
+if (connection) {
+    app.listen(port, () => {
+        console.log(`Servidor rodando na porta ${port}`);
+    })
+}
 
 module.exports = app

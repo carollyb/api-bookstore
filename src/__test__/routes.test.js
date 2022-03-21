@@ -7,6 +7,7 @@ describe("POST /books", () => {
     describe("Given a title, author_id, language, num_pages, publication_date and publisher", () => {
 
         test("Should create a table", async () => {
+            jest.setTimeout(11000)
             const response = await request(app).post("/books").send({
                 title: "Book Sample 0",
                 author_id: "54mpl310",
