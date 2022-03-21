@@ -7,10 +7,8 @@ async function databaseSync() {
         .then(() => {
             console.log(`Database rodando no ambiente de testes`);
         })
-        return true
     } catch (e) {
         console.log("Não pôde conectar ao DB de teste");
-        return false
     }
 }
 

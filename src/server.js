@@ -8,14 +8,12 @@ const app = express();
 
 app.use(express.json());
 
-const connection = databaseSync()
+databaseSync()
 
 app.use(bookRoute);
 
-if (connection) {
-    app.listen(port, () => {
-        console.log(`Servidor rodando na porta ${port}`);
-    })
-}
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+})
 
 module.exports = app
