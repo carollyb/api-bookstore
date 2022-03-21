@@ -25,6 +25,7 @@
 -  Instale as dependências
      ```js
      npm install
+- Crie um arquivo `.env` na pasta raiz do projeto, copie o conteúdo de `.env.example`, e coloque a porta de sua preferência (exceto 3001)
 - Inicie o projeto
    ```js
    npm run dev
