@@ -3,7 +3,7 @@ const express = require("express");
 const bookRoute = require("./routes");
 const databaseSync = require(process.env.SYNC)
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "test") {
 app.use(bookRoute);
 
 app.get("/", (req,res) => {
-    res.send({message: "API de Livraria - Resilia - Módulo 4"})
+    res.status(200).json({message: "API de Livraria - Resilia - Módulo 4"})
 })
 
 app.listen(port, () => {
