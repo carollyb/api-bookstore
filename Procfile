@@ -1,1 +1,1 @@
-web:node ./src/server.js
+web:node api-bookstore/src/server.js
