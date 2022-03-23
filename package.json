@@ -4,7 +4,6 @@
   "description": "\"projeto módulo 4\"",
   "main": "index.js",
   "scripts": {
-    "pretest": "cross-env NODE_ENV=test node ./src/database/testDatabaseConnection.js",
     "dev": "node ./src/server.js",
     "test": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest"
   },

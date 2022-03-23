@@ -8,7 +8,9 @@ const app = express();
 
 app.use(express.json());
 
-databaseSync()
+if (process.env.NODE_ENV !== "test") {
+    databaseSync()
+}
 
 app.use(bookRoute);
 

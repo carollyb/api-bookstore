@@ -1,23 +1,15 @@
 const request = require("supertest");
 
-const app = require("../server")
+const app = require("../server");
+
+const databaseSync = require("../database/testDatabaseConnection")
 
 describe("POST /books", () => {
+    beforeAll(async () => {
+        await databaseSync()
+    })
 
     describe("Given a title, author_id, language, num_pages, publication_date and publisher", () => {
-
-        test("Should create a table", async () => {
-            
-            const response = await request(app).post("/books").send({
-                title: "Book Sample 0",
-                author_id: "54mpl310",
-                language: "Sample Language",
-                num_pages: 201,
-                publication_date: "2022-12-12T00:00:00.000Z",
-                publisher: "Sample Publisher"
-            })
-            expect(response).toEqual(response)
-        })
 
         test("Should generate a book id", async () => {
             const response = await request(app).post("/books").send({
