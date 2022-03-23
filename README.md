@@ -33,7 +33,7 @@
 - Crie um arquivo `.env` na pasta raiz do projeto, copie o conteúdo de `.env.example`, e coloque a porta de sua preferência (exceto 3001). Não altere os demais campos!
 - Inicie o projeto
    ```js
-   npm run dev
+   npm start
 ### Criando uma conexão no Beekeeper
 
   Caso queira observar as alterações no banco de dados, a aplicação open-source Beekeeper é uma opção.
@@ -81,6 +81,10 @@
 	"error": "This book already exists on our database"
   }
   ```
+
+### Deploy
+
+[Heroku-API-Bookstore](https://api-bookstore-resilia.herokuapp.com/)
 ### Testes
 - Foram implantados testes de integração para validar o funcionamento das rotas da API
 - Para rodar os testes automatizados, execute no terminal:
