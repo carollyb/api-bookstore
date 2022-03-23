@@ -4,7 +4,7 @@
   "description": "\"projeto módulo 4\"",
   "main": "index.js",
   "scripts": {
-    "start": "node .server.js",
+    "start": "node ./src/server.js",
     "dev": "node ./src/server.js",
     "test": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest"
   },
@@ -17,9 +17,7 @@
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
     "unit-tests": "^1.1.0",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
+    "uuid": "^8.3.2",
     "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "supertest": "^6.2.2"
