@@ -17,15 +17,20 @@
   ![Image](./public/images/db-base.JPG)
 
 ### Como executar o projeto
-- Você precisa ter instalada em sua máquina a versão 16.14.0 do NodeJS;
+- Você precisa ter instalada em sua máquina a versão 16.14.0 do NodeJS, o VSCode e o Insomnia;
 - Faça clone do seguinte repositório:
  
     ```js
     git clone https://github.com/carollyb/api-bookstore.git
+    ```
+
+- Abra o projeto no VSCode, abra o terminal e assegure-se que está na pasta `api-bookstore`. Caso esteja em uma pasta acima, execute o seguinte comando:
+  ```js
+  cd api-bookstore
 -  Instale as dependências
      ```js
      npm install
-- Crie um arquivo `.env` na pasta raiz do projeto, copie o conteúdo de `.env.example`, e coloque a porta de sua preferência (exceto 3001)
+- Crie um arquivo `.env` na pasta raiz do projeto, copie o conteúdo de `.env.example`, e coloque a porta de sua preferência (exceto 3001). Não altere os demais campos!
 - Inicie o projeto
    ```js
    npm run dev
@@ -41,22 +46,21 @@
 - Rodar o servidor com npm run dev e recarregar no Beekeeper: a(s) entidade(s) deve(m) aparecer lá
 
 ### Estrutura da API: rotas possíveis
-
-- POST: 
+<span style="color: green"> POST: </span>
   - /books (Cria um cadastro de um novo livro. Deve passar o objeto no corpo da requisição. O id não é necessário pois é gerado automaticamente através da biblioteca uuid)
   
-- GET: 
+<span style="color: purple"> GET: </span> 
   - /books (Lista todos os títulos cadastrados)
-  - /books/<título> (Lista títulos que sejam semelhantes ou iguais ao título passado como parâmetro)
+  - /books/`:title` (Lista títulos que sejam semelhantes ou iguais ao título passado como parâmetro)
 
-- PUT:
-  - /books/<id> (Atualiza todos os atributos de um livro cadastrado. Deve passar o objeto com todos os atributos no corpo da requisição, com exceção do id, que não deve ser alterado manualmente)
+<span style="color: orange"> PUT: </span>
+  - /books/`:id` (Atualiza todos os atributos de um livro cadastrado. Deve passar o objeto com todos os atributos no corpo da requisição, com exceção do id, que não deve ser alterado manualmente)
 
-- PATCH: 
-  - /books/<id> (Atualiza um título de um livro cadastrado. Deve passar o atributo no corpo da requisição, e o id como parâmetro)
+<span style="color: yellow"> PATCH: </span>
+  - /books/`:id` (Atualiza um título de um livro cadastrado. Deve passar o atributo no corpo da requisição, e o id como parâmetro)
 
-- DELETE:
-  - /books/<id> (Deleta um livro do banco de dados. Deve passar o id do livro como parâmetro)
+<span style="color: red"> DELETE: </span>
+  - /books/`:id` (Deleta um livro do banco de dados. Deve passar o id do livro como parâmetro)
 
 ### Exemplos de endpoints
 - Endpoint da requisição do cadastro de um novo livro:
@@ -70,12 +74,15 @@
 	"publication_date": "1927-12-12T00:00:00.000Z",
 	"publisher": "Penguin Books"
   }
+  ```
 - Endpoint de tentativa de cadastro de livro com título que já existe:
   ```js
   {
 	"error": "This book already exists on our database"
   }
+  ```
 ### Testes
+- Foram implantados testes de integração para validar o funcionamento das rotas da API
 - Para rodar os testes automatizados, execute no terminal:
 
   ```js

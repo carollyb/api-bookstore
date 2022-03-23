@@ -6,7 +6,7 @@ module.exports = {
      * Faz uma requisição à API, preenchendo o corpo da requisição com a instância do modelo e devolvendo a resposta em JSON.
      * @param {request} request 
      * @param {response} response 
-     * @returns Object
+     * @returns Promise
      */
     async handle(request, response) {
         

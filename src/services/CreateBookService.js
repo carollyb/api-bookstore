@@ -10,7 +10,7 @@ module.exports = {
      * @param {integer} num_pages 
      * @param {date} publication_date 
      * @param {string} publisher 
-     * @returns Object
+     * @returns Promise
      */
     async execute(title, author_id, language, num_pages, publication_date, publisher) {
                 
