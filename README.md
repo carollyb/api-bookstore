@@ -57,7 +57,7 @@
   - /books/`:id` (Atualiza todos os atributos de um livro cadastrado. Deve passar o objeto com todos os atributos no corpo da requisição, com exceção do id, que não deve ser alterado manualmente)
 
 <span style="color: yellow"> PATCH: </span>
-  - /books/`:id` (Atualiza um título de um livro cadastrado. Deve passar o atributo no corpo da requisição, e o id como parâmetro)
+  - /books/`:id` (Atualiza um ou mais atributos de um livro cadastrado, com exceção do id. Deve passar um ou mais atributos no corpo da requisição, e o id como parâmetro)
 
 <span style="color: red"> DELETE: </span>
   - /books/`:id` (Deleta um livro do banco de dados. Deve passar o id do livro como parâmetro)

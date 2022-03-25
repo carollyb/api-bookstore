@@ -1,18 +1,32 @@
 const Book = require("../models/bookModel")
 
 module.exports = {
-    async execute(id, newTitle) {
+    async execute(id, 
+        newTitle, 
+        newAuthor_id,
+        newLanguage,
+        newNum_pages,
+        newPublication_date,
+        newPublisher) {
         
-        const book = await Book.findByPk(id);
+        let book = await Book.findByPk(id);
 
         if (book == null) {
             throw new Error("Could not update book")
         }
 
-        book.title = newTitle;
+        const newBook = await Book.update({
+            title: newTitle,
+            author_id: newAuthor_id,
+            language: newLanguage,
+            num_pages: newNum_pages,
+            publication_date: newPublication_date,
+            publisher: newPublisher
+        }, {where: {id: id}});
 
-        await book.save()
-
-        return book
+        if (newBook) {
+            book = await Book.findByPk(id);
+            return book
+        }
     }
 }
